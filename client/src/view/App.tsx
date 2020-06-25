@@ -2,11 +2,12 @@ import { CssBaseline, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import LoadingPage from '../components/loading/LoadingPage';
+import NavigationRail from '../components/navigation-rail/NavigationRail';
 import PrivateRoute from '../components/PrivateRoute';
 import { useLogin } from '../hooks/LoginService';
-import { ROUTES, RouteType, RoutingPath, ROOT_REDIRECT_PATH } from '../routes/Routing.routes';
+import { ROOT_REDIRECT_PATH, ROUTES, RouteType, RoutingPath } from '../routes/Routing.routes';
 import AppBar from './AppBar';
-import NavigationRail from '../components/navigation-rail/NavigationRail';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,15 +80,17 @@ function App() {
           )}
 
           <div className={classes.content}>
-            <Switch>
-              {routes}
+            <React.Suspense fallback={<LoadingPage />}>
+              <Switch>
+                {routes}
 
-              <Route
-                exact
-                path={RoutingPath.ROOT}
-                render={() => <Redirect to={ROOT_REDIRECT_PATH} />}
-              />
-            </Switch>
+                <Route
+                  exact
+                  path={RoutingPath.ROOT}
+                  render={() => <Redirect to={ROOT_REDIRECT_PATH} />}
+                />
+              </Switch>
+            </React.Suspense>
           </div>
         </div>
       </div>

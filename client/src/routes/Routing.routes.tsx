@@ -22,7 +22,6 @@ import AttendanceView from '../view/attendance/AttendanceView';
 import CriteriaInfoView from '../view/criteria-info-view/CriteriaInfoView';
 import Dashboard from '../view/dashboard/Dashboard';
 import GenerateTutorials from '../view/generate-tutorials/GenerateTutorials';
-import ImportUsers from '../view/import-data/ImportUsers';
 import Login from '../view/Login';
 import EnterScheinexamPoints from '../view/points-scheinexam/enter-form/EnterScheinexamPoints';
 import ScheinexamPointsOverview from '../view/points-scheinexam/overview/ScheinexamPointsOverview';
@@ -39,7 +38,9 @@ import TutorStudentmanagement from '../view/studentmanagement/TutorStudentmanage
 import Teamoverview from '../view/teamoverview/Teamoverview';
 import TutorialManagement from '../view/tutorialmanagement/TutorialManagement';
 import TutorialSubstituteManagement from '../view/tutorialmanagement/TutorialSubstituteManagement';
-import UserManagement from '../view/usermanagement/UserManagement';
+
+const ImportUsers = React.lazy(() => import('../view/import-data/ImportUsers'));
+const UserManagement = React.lazy(() => import('../view/usermanagement/UserManagement'));
 
 export enum RoutingPath {
   ROOT = '/',
