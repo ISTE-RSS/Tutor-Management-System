@@ -36,7 +36,7 @@ export class ScheinexamController {
   async createScheinexam(@Body() dto: ScheinexamDTO): Promise<IScheinExam> {
     const scheinexam = await this.scheinexamService.create(dto);
 
-    return scheinexam;
+    return scheinexam.toDTO();
   }
 
   @Get('/:id')
@@ -56,7 +56,7 @@ export class ScheinexamController {
   ): Promise<IScheinExam> {
     const scheinexam = await this.scheinexamService.update(id, dto);
 
-    return scheinexam;
+    return scheinexam.toDTO();
   }
 
   @Delete('/:id')

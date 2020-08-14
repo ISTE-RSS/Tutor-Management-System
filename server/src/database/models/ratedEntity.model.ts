@@ -1,4 +1,5 @@
 import { DocumentType, prop } from '@typegoose/typegoose';
+import { CrudModel } from '../../helpers/CRUDService_new';
 import { HasExercisesDTO, RatedEntityDTO } from '../../module/scheinexam/scheinexam.dto';
 import { ExercisePointsInfo } from '../../shared/model/Gradings';
 import { IHasExercises } from '../../shared/model/HasExercises';
@@ -12,7 +13,7 @@ interface PassedInformation {
   total: ExercisePointsInfo;
 }
 
-export abstract class HasExercisesModel implements HasExerciseDocuments {
+export abstract class HasExercisesModel extends CrudModel implements HasExerciseDocuments {
   @prop({ required: true, type: ExerciseModel })
   exercises!: ExerciseDocument[];
 
@@ -41,13 +42,9 @@ export abstract class HasExercisesModel implements HasExerciseDocuments {
   }
 }
 
-export class RatedEntityModel extends HasExercisesModel {
+export abstract class RatedEntityModel extends HasExercisesModel {
   @prop({ required: true })
   percentageNeeded!: number;
-
-  static fromDTO(dto: RatedEntityDTO): RatedEntityModel {
-    return this.assignDTO(new RatedEntityModel(), dto);
-  }
 
   protected static assignDTO(model: RatedEntityModel, dto: RatedEntityDTO): RatedEntityModel {
     super.assignDTO(model, dto);

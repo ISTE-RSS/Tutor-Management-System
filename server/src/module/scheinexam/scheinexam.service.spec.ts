@@ -135,7 +135,7 @@ describe('ScheinexamService', () => {
     const dto = getDTO();
     const created = await service.create(dto);
 
-    assertScheinexamDTO({ expected: dto, actual: created });
+    assertScheinexamDTO({ expected: dto, actual: created.toDTO() });
   });
 
   it('update basic information of a scheinexam', async () => {
@@ -150,7 +150,7 @@ describe('ScheinexamService', () => {
     const oldScheinexam = await service.create(createDTO);
     const updated = await service.update(oldScheinexam.id, updateDTO);
 
-    assertScheinexamDTO({ expected: updateDTO, actual: updated });
+    assertScheinexamDTO({ expected: updateDTO, actual: updated.toDTO() });
   });
 
   it('update exercises of a scheinexam', async () => {
@@ -169,7 +169,7 @@ describe('ScheinexamService', () => {
     const oldScheinexam = await service.create(createDTO);
     const updated = await service.update(oldScheinexam.id, updateDTO);
 
-    assertScheinexamDTO({ expected: updateDTO, actual: updated });
+    assertScheinexamDTO({ expected: updateDTO, actual: updated.toDTO() });
   });
 
   it('update subexercise of a scheinexam', async () => {
@@ -213,7 +213,7 @@ describe('ScheinexamService', () => {
     const oldScheinexam = await service.create(createDTO);
     const updated = await service.update(oldScheinexam.id, updateDTO);
 
-    assertScheinexamDTO({ expected: updateDTO, actual: updated });
+    assertScheinexamDTO({ expected: updateDTO, actual: updated.toDTO() });
   });
 
   it('fail on updating a non-existing scheinexam', async () => {

@@ -10,8 +10,13 @@ import { HasExercisesModel } from './ratedEntity.model';
 export class SheetModel extends HasExercisesModel {
   static fromDTO(dto: SheetDTO): SheetModel {
     const model = new SheetModel();
+    SheetModel.assignDTO(model, dto);
 
-    super.assignDTO(model, dto);
+    return model;
+  }
+
+  protected static assignDTO(model: SheetModel, dto: SheetDTO): SheetModel {
+    HasExercisesModel.assignDTO(model, dto);
 
     model.sheetNo = dto.sheetNo;
     model.bonusSheet = dto.bonusSheet;
@@ -27,6 +32,12 @@ export class SheetModel extends HasExercisesModel {
 
   get sheetNoAsString(): string {
     return this.sheetNo.toString(10).padStart(2, '0');
+  }
+
+  updateFromDTO(this: SheetDocument, dto: SheetDTO): SheetDocument {
+    SheetModel.assignDTO(this, dto);
+
+    return this;
   }
 
   toDTO(this: SheetDocument): ISheet {
